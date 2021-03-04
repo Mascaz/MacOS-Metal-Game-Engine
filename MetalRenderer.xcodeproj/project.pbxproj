@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF0390A625F0BF73001C4EDC /* MathLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0390A525F0BF73001C4EDC /* MathLibrary.swift */; };
+		CF0390AA25F0C347001C4EDC /* treefir.obj in Resources */ = {isa = PBXBuildFile; fileRef = CF0390A825F0C347001C4EDC /* treefir.obj */; };
+		CF0390AB25F0C347001C4EDC /* treefir.mtl in Resources */ = {isa = PBXBuildFile; fileRef = CF0390A925F0C347001C4EDC /* treefir.mtl */; };
+		CF0390AE25F0C373001C4EDC /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0390AD25F0C373001C4EDC /* Transform.swift */; };
 		CF98CC2425E7966900A32D46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98CC2325E7966900A32D46 /* AppDelegate.swift */; };
 		CF98CC2625E7966900A32D46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98CC2525E7966900A32D46 /* ViewController.swift */; };
 		CF98CC2825E7966A00A32D46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF98CC2725E7966A00A32D46 /* Assets.xcassets */; };
@@ -20,6 +24,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CF0390A525F0BF73001C4EDC /* MathLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathLibrary.swift; sourceTree = "<group>"; };
+		CF0390A825F0C347001C4EDC /* treefir.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = treefir.obj; sourceTree = "<group>"; };
+		CF0390A925F0C347001C4EDC /* treefir.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = treefir.mtl; sourceTree = "<group>"; };
+		CF0390AD25F0C373001C4EDC /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 		CF98CC2025E7966900A32D46 /* MetalRenderer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalRenderer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF98CC2325E7966900A32D46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF98CC2525E7966900A32D46 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +75,7 @@
 			children = (
 				CF98CC2325E7966900A32D46 /* AppDelegate.swift */,
 				CF98CC2525E7966900A32D46 /* ViewController.swift */,
+				CF0390A525F0BF73001C4EDC /* MathLibrary.swift */,
 				CF98CC2725E7966A00A32D46 /* Assets.xcassets */,
 				CF98CC2925E7966A00A32D46 /* Main.storyboard */,
 				CF98CC2C25E7966A00A32D46 /* Info.plist */,
@@ -76,6 +85,7 @@
 				CF98CC3725E79CB100A32D46 /* Shaders.metal */,
 				CF98CC3A25E7B2A700A32D46 /* Extensions.swift */,
 				CF98CC3D25E7B92E00A32D46 /* Model.swift */,
+				CF0390AD25F0C373001C4EDC /* Transform.swift */,
 			);
 			path = MetalRenderer;
 			sourceTree = "<group>";
@@ -83,6 +93,8 @@
 		CF98CC4525E7BB3500A32D46 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CF0390A925F0C347001C4EDC /* treefir.mtl */,
+				CF0390A825F0C347001C4EDC /* treefir.obj */,
 				CF98CC4125E7BB2700A32D46 /* train.mtl */,
 				CF98CC4025E7BB2700A32D46 /* train.obj */,
 			);
@@ -146,8 +158,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF0390AA25F0C347001C4EDC /* treefir.obj in Resources */,
 				CF98CC2825E7966A00A32D46 /* Assets.xcassets in Resources */,
 				CF98CC2B25E7966A00A32D46 /* Main.storyboard in Resources */,
+				CF0390AB25F0C347001C4EDC /* treefir.mtl in Resources */,
 				CF98CC4325E7BB2700A32D46 /* train.mtl in Resources */,
 				CF98CC4225E7BB2700A32D46 /* train.obj in Resources */,
 			);
@@ -161,10 +175,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF98CC3B25E7B2A700A32D46 /* Extensions.swift in Sources */,
+				CF0390A625F0BF73001C4EDC /* MathLibrary.swift in Sources */,
 				CF98CC3825E79CB100A32D46 /* Shaders.metal in Sources */,
 				CF98CC2625E7966900A32D46 /* ViewController.swift in Sources */,
 				CF98CC3E25E7B92E00A32D46 /* Model.swift in Sources */,
 				CF98CC3525E7974400A32D46 /* Renderer.swift in Sources */,
+				CF0390AE25F0C373001C4EDC /* Transform.swift in Sources */,
 				CF98CC2425E7966900A32D46 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
