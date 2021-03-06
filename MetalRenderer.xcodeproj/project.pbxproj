@@ -11,6 +11,7 @@
 		CF0390AA25F0C347001C4EDC /* treefir.obj in Resources */ = {isa = PBXBuildFile; fileRef = CF0390A825F0C347001C4EDC /* treefir.obj */; };
 		CF0390AB25F0C347001C4EDC /* treefir.mtl in Resources */ = {isa = PBXBuildFile; fileRef = CF0390A925F0C347001C4EDC /* treefir.mtl */; };
 		CF0390AE25F0C373001C4EDC /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0390AD25F0C373001C4EDC /* Transform.swift */; };
+		CF0390B125F0E51B001C4EDC /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0390B025F0E51B001C4EDC /* Camera.swift */; };
 		CF98CC2425E7966900A32D46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98CC2325E7966900A32D46 /* AppDelegate.swift */; };
 		CF98CC2625E7966900A32D46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98CC2525E7966900A32D46 /* ViewController.swift */; };
 		CF98CC2825E7966A00A32D46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF98CC2725E7966A00A32D46 /* Assets.xcassets */; };
@@ -28,6 +29,8 @@
 		CF0390A825F0C347001C4EDC /* treefir.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = treefir.obj; sourceTree = "<group>"; };
 		CF0390A925F0C347001C4EDC /* treefir.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = treefir.mtl; sourceTree = "<group>"; };
 		CF0390AD25F0C373001C4EDC /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
+		CF0390B025F0E51B001C4EDC /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		CF0390B325F0E643001C4EDC /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		CF98CC2025E7966900A32D46 /* MetalRenderer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalRenderer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF98CC2325E7966900A32D46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF98CC2525E7966900A32D46 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +89,8 @@
 				CF98CC3A25E7B2A700A32D46 /* Extensions.swift */,
 				CF98CC3D25E7B92E00A32D46 /* Model.swift */,
 				CF0390AD25F0C373001C4EDC /* Transform.swift */,
+				CF0390B025F0E51B001C4EDC /* Camera.swift */,
+				CF0390B325F0E643001C4EDC /* Common.h */,
 			);
 			path = MetalRenderer;
 			sourceTree = "<group>";
@@ -132,6 +137,7 @@
 				TargetAttributes = {
 					CF98CC1F25E7966900A32D46 = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
 					};
 				};
 			};
@@ -182,6 +188,7 @@
 				CF98CC3525E7974400A32D46 /* Renderer.swift in Sources */,
 				CF0390AE25F0C373001C4EDC /* Transform.swift in Sources */,
 				CF98CC2425E7966900A32D46 /* AppDelegate.swift in Sources */,
+				CF0390B125F0E51B001C4EDC /* Camera.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +263,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = MetalRenderer/Common.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -310,6 +318,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = MetalRenderer/Common.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
@@ -319,7 +328,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MetalRenderer/MetalRenderer.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = N68K4RMQ8S;
@@ -331,6 +342,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Mascaz.MetalRenderer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = MetalRenderer/Common.h;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -340,7 +353,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MetalRenderer/MetalRenderer.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = N68K4RMQ8S;
@@ -352,6 +367,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Mascaz.MetalRenderer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = MetalRenderer/Common.h;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

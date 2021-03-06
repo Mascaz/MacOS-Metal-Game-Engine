@@ -18,11 +18,13 @@ class Renderer: NSObject {
     let commandQueue: MTLCommandQueue
     static var library: MTLLibrary!
     let pipelineState: MTLRenderPipelineState
+    let depthStencilState: MTLDepthStencilState
     
     let train: Model
     let tree: Model
+    let camera = ArcballCamera()
     
-    var timer: Float = 0
+    var uniforms = Uniforms()
     
     init(view: MTKView) {
         guard let device = MTLCreateSystemDefaultDevice(),
@@ -34,16 +36,30 @@ class Renderer: NSObject {
         self.commandQueue = commandQueue
         Renderer.library = device.makeDefaultLibrary()
         pipelineState = Renderer.createPipelineState()
+        depthStencilState = Renderer.createDepthState()
+        
+        camera.target = [0, 0.8, 0]
+        camera.distance = 3
         
         train = Model(name: "train")
         train.transform.position = [0.4, 0, 0]
         train.transform.scale = 0.5
         
         tree = Model(name: "treefir")
-        tree.transform.position = [-0.6, 0, 0.3]
+        tree.transform.position = [-1, 0, 0.3]
         tree.transform.scale = 0.5
         
+        view.depthStencilPixelFormat = .depth32Float
+        
         super.init()
+    }
+    
+    static func createDepthState() -> MTLDepthStencilState {
+        let depthDescriptor = MTLDepthStencilDescriptor()
+        depthDescriptor.depthCompareFunction = .less
+        depthDescriptor.isDepthWriteEnabled = true
+        
+        return Renderer.device.makeDepthStencilState(descriptor: depthDescriptor)!
     }
     
     static func createPipelineState() -> MTLRenderPipelineState {
@@ -56,14 +72,21 @@ class Renderer: NSObject {
         pipelineStateDescriptor.vertexFunction = vertexFunction
         pipelineStateDescriptor.fragmentFunction = fragmentFunction
         pipelineStateDescriptor.vertexDescriptor = MTLVertexDescriptor.defaultVertexDescriptor()
+        pipelineStateDescriptor.depthAttachmentPixelFormat = .depth32Float
         
         return try! Renderer.device.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
+    }
+    
+    func zoom(delta: Float) {
+        let sensitivity: Float = 0.05
+        let cameraVector = camera.transform.matrix.upperLeft.columns.2
+        camera.transform.position += delta * sensitivity * cameraVector
     }
 }
 
 extension Renderer: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        
+        camera.aspect = Float(view.bounds.width / view.bounds.height)
     }
     
     func draw(in view: MTKView) {
@@ -74,13 +97,17 @@ extension Renderer: MTKViewDelegate {
             return
         }
         commandEncoder.setRenderPipelineState(pipelineState)
+        commandEncoder.setDepthStencilState(depthStencilState)
         
-        var modelMatrix = train.transform.matrix
-        commandEncoder.setVertexBytes(&modelMatrix, length: MemoryLayout<float4x4>.stride, index: 21)
+        uniforms.viewMatrix = camera.viewMatrix
+        uniforms.projectionMatrix = camera.projectionMatrix
         
         let models = [tree, train]
         
         for model in models {
+            uniforms.modelMatrix = model.transform.matrix
+            commandEncoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: 21)
+            
             for mtkMesh in model.mtkMeshes {
                 for vertexBuffer in mtkMesh.vertexBuffers {
                     commandEncoder.setVertexBuffer(vertexBuffer.buffer, offset: 0, index: 0)
