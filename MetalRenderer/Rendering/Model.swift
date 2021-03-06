@@ -32,12 +32,14 @@ class Model : Node {
     
 }
 
-    extension Model: Renderable {
-    func render(commandEncoder: MTLRenderCommandEncoder, uniforms vertex: Uniforms) {
+extension Model: Renderable {
+    func render(commandEncoder: MTLRenderCommandEncoder, uniforms vertex: Uniforms, fragmentUniforms fragment: FragmentUniforms) {
         var uniforms = vertex
+        var fragmentUniforms = fragment
 
         uniforms.modelMatrix = worldMatrix
         commandEncoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: 21)
+        commandEncoder.setFragmentBytes(&fragmentUniforms, length: MemoryLayout<FragmentUniforms>.stride, index: 22)
 
         for mtkMesh in mtkMeshes {
             for vertexBuffer in mtkMesh.vertexBuffers {
