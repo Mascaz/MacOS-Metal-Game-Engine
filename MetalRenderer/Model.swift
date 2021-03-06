@@ -8,7 +8,7 @@
 import Foundation
 import MetalKit
 
-class Model {
+class Model : Node {
     
     var mdlMeshes: [MDLMesh]
     var mtkMeshes: [MTKMesh]
@@ -25,5 +25,34 @@ class Model {
         
         self.mdlMeshes = mdlMeshes
         self.mtkMeshes = mtkMeshes
+        
+        super.init()
+        self.name = name;
+    }
+    
+}
+
+    extension Model: Renderable {
+    func render(commandEncoder: MTLRenderCommandEncoder, uniforms vertex: Uniforms) {
+        var uniforms = vertex
+
+        uniforms.modelMatrix = worldMatrix
+        commandEncoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: 21)
+
+        for mtkMesh in mtkMeshes {
+            for vertexBuffer in mtkMesh.vertexBuffers {
+                commandEncoder.setVertexBuffer(vertexBuffer.buffer, offset: 0, index: 0)
+
+                var color = 0
+
+                for submesh in mtkMesh.submeshes {
+                    commandEncoder.setVertexBytes(&color, length: MemoryLayout<Int>.stride, index: 11)
+
+                    commandEncoder.drawIndexedPrimitives(type: .triangle, indexCount: submesh.indexCount, indexType: submesh.indexType, indexBuffer: submesh.indexBuffer.buffer, indexBufferOffset: submesh.indexBuffer.offset)
+
+                    color += 1
+                }
+            }
+        }
     }
 }

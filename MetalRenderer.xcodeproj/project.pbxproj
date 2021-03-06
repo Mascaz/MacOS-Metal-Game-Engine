@@ -12,6 +12,10 @@
 		CF0390AB25F0C347001C4EDC /* treefir.mtl in Resources */ = {isa = PBXBuildFile; fileRef = CF0390A925F0C347001C4EDC /* treefir.mtl */; };
 		CF0390AE25F0C373001C4EDC /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0390AD25F0C373001C4EDC /* Transform.swift */; };
 		CF0390B125F0E51B001C4EDC /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0390B025F0E51B001C4EDC /* Camera.swift */; };
+		CF91839125F3943000E9EA7F /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF91839025F3943000E9EA7F /* Node.swift */; };
+		CF91839425F397FC00E9EA7F /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF91839325F397FC00E9EA7F /* Scene.swift */; };
+		CF91839725F3980F00E9EA7F /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF91839625F3980F00E9EA7F /* GameScene.swift */; };
+		CF91839A25F3983500E9EA7F /* Renderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF91839925F3983500E9EA7F /* Renderable.swift */; };
 		CF98CC2425E7966900A32D46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98CC2325E7966900A32D46 /* AppDelegate.swift */; };
 		CF98CC2625E7966900A32D46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF98CC2525E7966900A32D46 /* ViewController.swift */; };
 		CF98CC2825E7966A00A32D46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF98CC2725E7966A00A32D46 /* Assets.xcassets */; };
@@ -31,6 +35,10 @@
 		CF0390AD25F0C373001C4EDC /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 		CF0390B025F0E51B001C4EDC /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		CF0390B325F0E643001C4EDC /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		CF91839025F3943000E9EA7F /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		CF91839325F397FC00E9EA7F /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		CF91839625F3980F00E9EA7F /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		CF91839925F3983500E9EA7F /* Renderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderable.swift; sourceTree = "<group>"; };
 		CF98CC2025E7966900A32D46 /* MetalRenderer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalRenderer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF98CC2325E7966900A32D46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF98CC2525E7966900A32D46 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -85,7 +93,11 @@
 				CF98CC4525E7BB3500A32D46 /* Models */,
 				CF98CC2D25E7966A00A32D46 /* MetalRenderer.entitlements */,
 				CF98CC3425E7974400A32D46 /* Renderer.swift */,
+				CF91839325F397FC00E9EA7F /* Scene.swift */,
+				CF91839925F3983500E9EA7F /* Renderable.swift */,
+				CF91839625F3980F00E9EA7F /* GameScene.swift */,
 				CF98CC3725E79CB100A32D46 /* Shaders.metal */,
+				CF91839025F3943000E9EA7F /* Node.swift */,
 				CF98CC3A25E7B2A700A32D46 /* Extensions.swift */,
 				CF98CC3D25E7B92E00A32D46 /* Model.swift */,
 				CF0390AD25F0C373001C4EDC /* Transform.swift */,
@@ -181,14 +193,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF98CC3B25E7B2A700A32D46 /* Extensions.swift in Sources */,
+				CF91839125F3943000E9EA7F /* Node.swift in Sources */,
 				CF0390A625F0BF73001C4EDC /* MathLibrary.swift in Sources */,
 				CF98CC3825E79CB100A32D46 /* Shaders.metal in Sources */,
 				CF98CC2625E7966900A32D46 /* ViewController.swift in Sources */,
 				CF98CC3E25E7B92E00A32D46 /* Model.swift in Sources */,
+				CF91839725F3980F00E9EA7F /* GameScene.swift in Sources */,
 				CF98CC3525E7974400A32D46 /* Renderer.swift in Sources */,
 				CF0390AE25F0C373001C4EDC /* Transform.swift in Sources */,
 				CF98CC2425E7966900A32D46 /* AppDelegate.swift in Sources */,
 				CF0390B125F0E51B001C4EDC /* Camera.swift in Sources */,
+				CF91839A25F3983500E9EA7F /* Renderable.swift in Sources */,
+				CF91839425F397FC00E9EA7F /* Scene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
