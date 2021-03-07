@@ -13,7 +13,6 @@ class Renderer: NSObject {
     let commandQueue: MTLCommandQueue
 
     static var library: MTLLibrary!
-    let pipelineState: MTLRenderPipelineState
     let depthStencilState: MTLDepthStencilState
 
     weak var scene: Scene? // we make this weak because the strong reference is held by the main view
@@ -29,7 +28,6 @@ class Renderer: NSObject {
         Renderer.device = device
         self.commandQueue = commandQueue
         Renderer.library = device.makeDefaultLibrary()
-        pipelineState = Renderer.createPipelineState()
         depthStencilState = Renderer.createDepthState()
         
         view.depthStencilPixelFormat = .depth32Float
@@ -43,21 +41,6 @@ class Renderer: NSObject {
         depthDescriptor.isDepthWriteEnabled = true
         
         return Renderer.device.makeDepthStencilState(descriptor: depthDescriptor)!
-    }
-    
-    static func createPipelineState() -> MTLRenderPipelineState {
-        let pipelineStateDescriptor = MTLRenderPipelineDescriptor()
-        
-        // pipeline state properties
-        pipelineStateDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
-        let vertexFunction = Renderer.library.makeFunction(name: "vertex_main")
-        let fragmentFunction = Renderer.library.makeFunction(name: "fragment_main")
-        pipelineStateDescriptor.vertexFunction = vertexFunction
-        pipelineStateDescriptor.fragmentFunction = fragmentFunction
-        pipelineStateDescriptor.vertexDescriptor = MTLVertexDescriptor.defaultVertexDescriptor()
-        pipelineStateDescriptor.depthAttachmentPixelFormat = .depth32Float
-        
-        return try! Renderer.device.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
     }
 }
 
@@ -74,7 +57,6 @@ extension Renderer: MTKViewDelegate {
               let scene = scene else {
             return
         }
-        commandEncoder.setRenderPipelineState(pipelineState)
         commandEncoder.setDepthStencilState(depthStencilState)
 
         let deltaTime = 1 / Float(view.preferredFramesPerSecond)

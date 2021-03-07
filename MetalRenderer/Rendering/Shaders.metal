@@ -12,22 +12,15 @@ using namespace metal;
 
 constant float3 lightPosition = float3(2.0, 1.0, 0);
 constant float3 ambientLightColor = float3(1.0, 1.0, 1.0);
-constant float ambientLightIntensity = 0.3;
+constant float ambientLightIntensity = 0.4;
 constant float3 lightSpecularColor = float3(1.0, 1.0, 1.0);
 
-constant float3 color[6] {
-    float3(1, 0, 0),
-    float3(0, 1, 0),
-    float3(0, 0, 1),
-    float3(0, 1, 0),
-    float3(0, 0, 1),
-    float3(1, 0, 0)
-};
-
+constant bool hasColorTexture [[function_constant(0)]];
 
 struct VertexIn {
     float4 position [[attribute(0)]];
     float3 normal [[attribute(1)]];
+    float2 uv [[attribute(2)]];
 };
  
 struct VertexOut {
@@ -35,30 +28,33 @@ struct VertexOut {
     float3 color;
     float3 worldNormal;
     float3 worldPosition;
+    float2 uv;
 };
 
 vertex VertexOut vertex_main(VertexIn vertexBuffer [[stage_in]],
-                             constant uint &colorIndex [[buffer(11)]],
                              constant Uniforms &uniforms [[buffer(21)]]) {
     VertexOut out {
         .position = uniforms.projectionMatrix * uniforms.viewMatrix * uniforms.modelMatrix * vertexBuffer.position,
         .worldNormal = (uniforms.modelMatrix * float4(vertexBuffer.normal, 0)).xyz,
         .worldPosition = (uniforms.modelMatrix * vertexBuffer.position).xyz,
-        .color = color[colorIndex]
+        .uv = vertexBuffer.uv
     };
     
     return out;
 }
 
 fragment float4 fragment_main(VertexOut in [[stage_in]],
-                              constant FragmentUniforms &fragmentUniforms [[buffer(22)]]) {
+                              constant Material &material [[buffer(11)]],
+                              constant FragmentUniforms &fragmentUniforms [[buffer(22)]],
+                              texture2d<float> baseColorTexture [[texture(0), function_constant(hasColorTexture)]]) {
+    const sampler s(filter::linear);
     float3 lightVector = normalize(lightPosition);
     float3 normalVector = normalize(in.worldNormal);
     
-    float materialShininess = 32;
-    float3 materialSpecularColor = float3(1.0, 1.0, 1.0);
+    float materialShininess = material.shininess;
+    float3 materialSpecularColor = material.specularColor;
     
-    float3 baseColor = in.color;
+    float3 baseColor = hasColorTexture ? baseColorTexture.sample(s, in.uv).rgb : material.baseColor;
     
     float diffuseIntensity = saturate(dot(lightVector, normalVector));
     
