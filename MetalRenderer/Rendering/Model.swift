@@ -28,6 +28,7 @@ class Model : Node {
         
         super.init()
         self.name = name;
+        self.boundingBox = mdlMeshes[0].boundingBox
     }
 
     func render(commandEncoder: MTLRenderCommandEncoder, submesh: Submesh) {

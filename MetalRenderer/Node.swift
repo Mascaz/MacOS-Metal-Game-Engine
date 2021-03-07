@@ -29,6 +29,7 @@
 
 
 import Foundation
+import ModelIO
 
 class Node {
   var name = "Untitled"
@@ -53,6 +54,8 @@ class Node {
     }
     return matrix
   }
+
+  var boundingBox = MDLAxisAlignedBoundingBox()
   
   final func add(childNode: Node) {
     children.append(childNode)
@@ -69,5 +72,20 @@ class Node {
       $0 === childNode
     }) else { return }
     children.remove(at: index)
+  }
+
+  func worldBoundingBox(matrix: float4x4? = nil) -> Rect {
+    var worldMatrix = self.worldMatrix
+    if let matrix = matrix {
+      worldMatrix = worldMatrix * matrix
+    }
+
+    var lowerLeft = SIMD4<Float>(boundingBox.minBounds.x, 0, boundingBox.minBounds.z, 1)
+    lowerLeft = worldMatrix * lowerLeft
+
+    var upperRight = SIMD4<Float>(boundingBox.maxBounds.x, 0, boundingBox.maxBounds.z, 1)
+    upperRight = worldMatrix * upperRight
+
+    return Rect(x: lowerLeft.x, z: lowerLeft.z, width: upperRight.x - lowerLeft.x, height: upperRight.z - lowerLeft.z)
   }
 }
