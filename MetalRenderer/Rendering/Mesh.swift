@@ -25,15 +25,17 @@ struct Submesh {
 
     let textures: Textures
     let pipelineState: MTLRenderPipelineState
+    let instancedPipelineState: MTLRenderPipelineState
 
     init(mdlSubmesh: MDLSubmesh, mtkSubmesh: MTKSubmesh) {
         self.mtkSubmesh = mtkSubmesh
         material = Material(material: mdlSubmesh.material)
         textures = Textures(material: mdlSubmesh.material)
-        pipelineState = Submesh.createPipelineState(textures: textures)
+        pipelineState = Submesh.createPipelineState(vertexFunctionName: "vertex_main", textures: textures)
+        instancedPipelineState = Submesh.createPipelineState(vertexFunctionName: "vertex_instances", textures: textures)
     }
 
-    static func createPipelineState(textures: Textures) -> MTLRenderPipelineState {
+    static func createPipelineState(vertexFunctionName: String, textures: Textures) -> MTLRenderPipelineState {
         let functionConstants = MTLFunctionConstantValues()
         var property = textures.baseColor != nil
         functionConstants.setConstantValue(&property, type: .bool, index: 0)
@@ -42,7 +44,7 @@ struct Submesh {
 
         // pipeline state properties
         pipelineStateDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
-        let vertexFunction = Renderer.library.makeFunction(name: "vertex_main")
+        let vertexFunction = Renderer.library.makeFunction(name: vertexFunctionName)
         let fragmentFunction = try! Renderer.library.makeFunction(name: "fragment_main", constantValues: functionConstants)
         pipelineStateDescriptor.vertexFunction = vertexFunction
         pipelineStateDescriptor.fragmentFunction = fragmentFunction

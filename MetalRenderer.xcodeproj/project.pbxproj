@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		325FF29ECCC5975C8A6B8A1E /* Mesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325FF6DA48EDF79D7B459739 /* Mesh.swift */; };
 		325FF490F1CD95C2FC90DE12 /* train.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 325FF35030646A5A4ABD5A97 /* train.mtl */; };
+		325FF4FAE3639C1A5F1A3857 /* Instance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325FF2B133EEC4C564764648 /* Instance.swift */; };
 		325FF5D8B4015EAAD834F22D /* train-color.png in Resources */ = {isa = PBXBuildFile; fileRef = 325FF211D783DA7620139DEB /* train-color.png */; };
 		325FF7E8B927A9D0A5DF7F0F /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 325FFC42E8308B5EC4F265A5 /* Shaders.metal */; };
 		325FF8D6195DB68ABCBA095A /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325FF4131CAFA9CB3CB68B84 /* Renderer.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		325FF211D783DA7620139DEB /* train-color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "train-color.png"; sourceTree = "<group>"; };
+		325FF2B133EEC4C564764648 /* Instance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instance.swift; sourceTree = "<group>"; };
 		325FF35030646A5A4ABD5A97 /* train.mtl */ = {isa = PBXFileReference; lastKnownFileType = file.mtl; path = train.mtl; sourceTree = "<group>"; };
 		325FF4131CAFA9CB3CB68B84 /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		325FF4DDF94206F41BAFF4E0 /* Renderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderable.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				325FF4DDF94206F41BAFF4E0 /* Renderable.swift */,
 				325FF4131CAFA9CB3CB68B84 /* Renderer.swift */,
 				325FF6DA48EDF79D7B459739 /* Mesh.swift */,
+				325FF2B133EEC4C564764648 /* Instance.swift */,
 			);
 			path = Rendering;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				325FFD1409D65118FBBCFA55 /* Renderable.swift in Sources */,
 				325FF8D6195DB68ABCBA095A /* Renderer.swift in Sources */,
 				325FF29ECCC5975C8A6B8A1E /* Mesh.swift in Sources */,
+				325FF4FAE3639C1A5F1A3857 /* Instance.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
